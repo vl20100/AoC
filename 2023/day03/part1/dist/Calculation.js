@@ -46,7 +46,7 @@ class Calculation {
                 }
                 else if (isReadingNumber === true && this.engine[posY][posX].match(/\d/) === null) {
                     isReadingNumber = false;
-                    currentNumberEndPosX = posX;
+                    currentNumberEndPosX = posX - 1;
                     if (this.isPartNumber(currentNumberPosY, currentNumberStartPosX, currentNumberEndPosX)) {
                         let nb = this.getFullNumber(currentNumberPosY, currentNumberStartPosX, currentNumberEndPosX);
                         if (this.countedNumbers.indexOf(nb) === -1) {
@@ -57,7 +57,7 @@ class Calculation {
                 }
                 else if (isReadingNumber === true && posX === this.engineSizeX - 1) {
                     isReadingNumber = false;
-                    currentNumberEndPosX = posX + 1;
+                    currentNumberEndPosX = posX;
                     if (this.isPartNumber(currentNumberPosY, currentNumberStartPosX, currentNumberEndPosX)) {
                         let nb = this.getFullNumber(currentNumberPosY, currentNumberStartPosX, currentNumberEndPosX);
                         if (this.countedNumbers.indexOf(nb) === -1) {
@@ -75,19 +75,20 @@ class Calculation {
         let maxX = currentNumberEndPosX === this.engineSizeX ? currentNumberEndPosX : (currentNumberEndPosX + 1);
         let minY = currentNumberPosY === 0 ? currentNumberPosY : (currentNumberPosY - 1);
         let maxY = currentNumberPosY === (this.engineSizeY - 1) ? currentNumberPosY : (currentNumberPosY + 1);
+        let isValid = false;
         for (let y = minY; y <= maxY; y++) {
-            for (let x = minX; x <= maxX; x++) {
+            for (let x = minX; x < maxX; x++) {
                 let char = this.engine[y][x];
                 if (typeof char !== 'undefined' && char.match(/\d|\./) === null) {
-                    return true;
+                    isValid = true;
                 }
             }
         }
-        return false;
+        return isValid;
     }
     getFullNumber(currentNumberPosY, currentNumberStartPosX, currentNumberEndPosX) {
         let str = '';
-        for (let x = currentNumberStartPosX; x < currentNumberEndPosX; x++) {
+        for (let x = currentNumberStartPosX; x <= currentNumberEndPosX; x++) {
             str += this.engine[currentNumberPosY][x];
         }
         return Number(str);
