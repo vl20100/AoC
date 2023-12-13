@@ -3,6 +3,7 @@
 2023/day02/part1/node_modules/*
 2023/day02/part2/node_modules/*
 2023/day03/part1/node_modules/*
+2023/day03/part1b/node_modules/*
 2023/day03/part2/node_modules/*
 2023/day04/part1/node_modules/*
 2023/day04/part2/node_modules/*
@@ -48,3 +49,4 @@
 2023/day24/part2/node_modules/*
 2023/day25/part1/node_modules/*
 2023/day25/part2/node_modules/*
+.vscode
