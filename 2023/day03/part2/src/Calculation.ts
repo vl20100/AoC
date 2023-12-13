@@ -1,9 +1,11 @@
 import { readFileSync } from "fs";
 import { join } from "path";
+import Engine from "./Engine";
 
 export default class Calculation {
     filename: string;
     filecontent: string = '';
+    engine: Engine = new Engine();
 
     constructor(filename: string) {
         this.filename = filename;
@@ -18,11 +20,20 @@ export default class Calculation {
 
     calculate() {
         let tab = this.filecontent.split(/\r?\n/);
-        let sum = 0;
 
         tab.forEach((line) => {
             if (line !== '') {
-                
+                this.engine.addLine(line);
+            }
+        });
+
+        this.engine.compileGears();
+
+        let sum = 0;
+
+        this.engine.gears.forEach((gear) => {
+            if (gear.isPart) {
+                sum += gear.sum;
             }
         });
 
