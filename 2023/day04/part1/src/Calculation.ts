@@ -1,5 +1,6 @@
 import { readFileSync } from "fs";
 import { join } from "path";
+import Game from "./Game";
 
 export default class Calculation {
     filename: string;
@@ -22,7 +23,8 @@ export default class Calculation {
 
         tab.forEach((line) => {
             if (line !== '') {
-                
+                let g = new Game(line);
+                sum += g.getSum();
             }
         });
 
