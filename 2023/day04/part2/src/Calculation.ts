@@ -1,9 +1,11 @@
 import { readFileSync } from "fs";
 import { join } from "path";
+import Game from "./Game";
 
 export default class Calculation {
     filename: string;
     filecontent: string = '';
+    games: Array<Game> = [];
 
     constructor(filename: string) {
         this.filename = filename;
@@ -22,8 +24,15 @@ export default class Calculation {
 
         tab.forEach((line) => {
             if (line !== '') {
-                
+                let g = new Game(line);
+                this.games.push(g);
             }
+        });
+
+        this.games.forEach((game) => {
+
+            this.games = game.getSum(this.games);
+            sum += game.sum;
         });
 
         return sum;
