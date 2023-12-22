@@ -44,8 +44,6 @@ export default class Game {
             }
         }
 
-        console.log('game ' + this.number + ' sum ' + this.sum);
-
         return games;
     }
 }
